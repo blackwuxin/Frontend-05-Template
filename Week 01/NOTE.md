@@ -23,9 +23,17 @@
 
 这是一个递归的过程，对方最好的策略，对我们来说是最糟糕的策略。
 
-### 一位数组复制
+### 数组复制
+一维数组：
 ```
     function clone(pattern) {
         return Object.create(pattern);
+    }
+```
+
+二维数组：
+```
+    function clone(pattern) {
+        return  JSON.parse(JSON.stringify(pattern))
     }
 ```
