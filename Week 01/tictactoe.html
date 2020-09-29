@@ -28,10 +28,11 @@
 <script>
     let pattern = [
         0, 0, 0,
-        0, 0, 0,
+        0, 1, 0,
         0, 0, 0
     ]
-    let color = 1;
+    let color = 2;
+
     function show() {
         let board = document.getElementById('board');
         board.innerHTML = "";
@@ -40,27 +41,39 @@
                 let cell = document.createElement('div');
                 cell.classList.add('cell');
                 cell.innerText = pattern[i * 3 + j] == 2 ? 'X' : pattern[i * 3 + j] == 1 ? 'O' : "";
-                cell.addEventListener('click', () => move(i, j));
+                cell.addEventListener('click', () => userMove(i, j));
                 board.appendChild(cell);
             }
             board.appendChild(document.createElement('br'))
         }
     }
-    function move(x, y) {
+
+    function userMove(x, y) {
         pattern[x * 3 + y] = color;
         if (check(pattern, color)) {
             alert(color == 2 ? 'X is winner' : 'O is winner');
         }
         color = 3 - color;
-        console.log(bestChioce(pattern, color));
         show();
-        if (willWin(pattern, color)) {
-            console.log(color == 2 ? 'X will win!' : 'O will win!');
-        }
+        computerMove()
     }
+
+    function computerMove(x, y) {
+        let choice = bestChioce(pattern, color);
+        if (choice.point) {
+            pattern[choice.point[0] * 3 + choice.point[1]] = color;
+        }
+        if (check(pattern, color)) {
+            alert(color == 2 ? 'X is winner!' : 'O is winner!');
+        }
+        color = 3 - color;
+        show();
+    }
+
     function clone(pattern) {
         return Object.create(pattern);
     }
+
     function willWin(pattern, color) {
         for (let i = 0; i < 3; i++) {
             for (let j = 0; j < 3; j++) {
@@ -70,7 +83,7 @@
                 let tmp = clone(pattern);
                 tmp[i * 3 + j] = color;
                 if (check(tmp, color)) {
-                    return [j, i];
+                    return [i, j];
                 }
             }
         }
@@ -86,7 +99,7 @@
             }
         }
         let result = -1;
-        outer:for (let i = 0; i < 3; i++) {
+        outer: for (let i = 0; i < 3; i++) {
             for (let j = 0; j < 3; j++) {
                 if (pattern[i * 3 + j]) {
                     continue;
@@ -96,10 +109,10 @@
                 let opp = bestChioce(tmp, 3 - color);
 
                 if (-opp.result >= result) {
-                    point = [j, i];
+                    point = [i, j];
                     result = -opp.result;
                 }
-                if(result == 1){
+                if (result == 1) {
                     break outer;
                 }
             }
