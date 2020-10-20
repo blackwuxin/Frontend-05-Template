@@ -36,14 +36,23 @@
     
     let source = [];
 
-    for (let token of tokenize("1 + 2 + 3")) {
+    for (let token of tokenize("1 + 2 * 5 + 3")) {
         if(token.type !== "Whitespace" && token.type !== "LineTerminator"){
             source.push(token);
         }
     }
 
-    function Expression(tokens){
-
+    function Expression(source){
+        if(source[0].type === 'AdditiveExpression' && source[1] && source[1].type === 'EOF'){
+            let node = {
+                type:"Expression",
+                children:[source.shift(),source.shift()]
+            }
+            source.unshift(node);
+            return node;
+        }
+        AdditiveExpression(source);
+        return Expression(source);
     }
     
     function AdditiveExpression(source){
@@ -102,5 +111,5 @@
         return MultiplicativeExpression(source);
     }
 
-    console.log(AdditiveExpression(source));
+    console.log(Expression(source));
 </script>
