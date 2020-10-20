@@ -41,3 +41,7 @@
 - | 竖线两边的内容是可选内容。它相当于or。
 - * 表示零个或者多个。
 - + 表示一个或者多个。
+
+### 
+使用`Array.prototype.shift()` 和 `Array.prototype.unshift()` 进行数组的拼接。
+
