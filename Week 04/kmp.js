@@ -1,4 +1,7 @@
 function kmp(source,pattern){
+    if(source == pattern){
+        return 0;
+    }
     //计算tabel
     let table = new Array(pattern.length).fill(0);
     {  
@@ -33,13 +36,18 @@ function kmp(source,pattern){
                 }
             }
             if(j == pattern.length)
-                return true;
+                return i-j;
         }
-        return false;
+        return -1;
     }
 }
 
 
-//abcdabce
+//abc c 
 
-console.log(kmp("abc","abc"));
+console.log(kmp("abc","c"));
+console.log(kmp("hello","ll"));
+console.log(kmp("",""));
+console.log(kmp("aaa","xxx"));
+
+
