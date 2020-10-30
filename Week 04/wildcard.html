@@ -28,7 +28,7 @@
         }
 
         lastIndex = i;
-
+        //匹配最后一个*号之前的字符
         for (let p = 0; p < starCount - 1; p++) {
             i++;
             let subPattern = "";
@@ -37,7 +37,7 @@
                 i++;
             }
 
-            let reg = new RegExp(subPattern.replace(/\?/g,"[\\s\\S]"),"g");
+            let reg = new RegExp(subPattern.replace(/\?/g,"[\\s\\S]"),"g"); // \s\S 代表所有字符
             reg.lastIndex = lastIndex;
 
             // console.log(reg.exec(source));
@@ -46,7 +46,7 @@
 
             lastIndex = reg.lastIndex;
         }
-
+        //匹配最后一个*号之后的字符串
         for(let j = 0; j <= source.length - lastIndex && pattern[pattern.length - j] !== "*";j++){
             if(pattern[pattern.length - j] !== source[source.length - j] && pattern[pattern.length-j] !== "?"){
                 return false;
