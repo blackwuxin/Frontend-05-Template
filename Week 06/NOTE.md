@@ -95,3 +95,12 @@ get a 代表属性，get:1 是直接赋值
 ## 其它产生式
 EBNF ABFN Customized
 
+## 现代语言分类
+- 形式语言——用途
+    - 数据描述语言
+    JSON、HTML、CSS、SQL、XAML
+    - 编程语言
+    C、C++、Java、C#、python、JavaScript、Ruby、Perl、Lisp、T-SQL、Clojure、Hask
+- 形式语言——表达方式
+    - 声明式语言
+    - 命令型语言
