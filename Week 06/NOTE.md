@@ -135,3 +135,51 @@ EBNF ABFN Customized
 - 子类型
 - 泛型
     - 逆变/协变
+
+## 一般命令式编程语言
+- Atom
+    - Indentifier
+    - Literal
+- Expression
+    - Atom
+    - Operator
+    - Punctuator
+- Statement
+    - Expression
+    - keyword
+    - Punctuator
+- Structure
+    - Function
+    - Class
+    - Process
+    - Namespace
+- Program
+    - Program
+    - Module
+    - Package
+    - Library 
+
+语法 -> 语义 -> 运行时
+
+## Atom
+- Grammar
+    - Literal
+    - Variable
+    - Keywords
+    - Whitespace
+    - Line Terminator
+- Runtime
+    - Types
+    - Execution Context
+### Types
+- Number
+    - IEEE 754 Double Float
+        - Sign(1)
+        - Exponent(11)
+        - Fraction(52)
+- String
+- Boolean
+- Object
+- Null
+- Undefined
+- Symbol
