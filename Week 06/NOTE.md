@@ -177,6 +177,18 @@ EBNF ABFN Customized
         - Sign(1)
         - Exponent(11)
         - Fraction(52)
+    - Grammar
+        - DecimalLiteral
+            - 0
+            - 0.
+            - .2
+            - 1e3
+        - BinaryIntegerLiteral
+            - 0b111
+        - OctalIntegerLiteral
+            - 0o10
+        - HexIntegerLiteral
+            - OxFF
 - String
 - Boolean
 - Object
