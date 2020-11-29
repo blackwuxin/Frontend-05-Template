@@ -10,3 +10,45 @@ URL 「http」 -> HTML 「parse」 -> DOM 「css computing」-> DOM with CSS 「
 - 每一个都知道下一个状态
     - 每个机器都有确定的下一个状态（Moore)
     - 每个机器根据输入决定下一个状态（Mealy)
+
+
+  JS中的有限状态机（Mealy）
+```js
+// 每个函数是一个状态
+function state(input) // 函数参数就是输入
+{
+  // 在函数中，可以自由地编写代码，处理每个状态的逻辑
+  return next; // 返回值作为下一个状态
+}
+
+// 以下是调用
+while(input) {
+  // 获取输入
+  state = state(input); // 把状态机的返回值作为下一个状态
+}
+```
+
+第一步：实现一个http请求
+* 设计一个HTTP请求的类Request：首先可以从它的用法上开始去设计，一般去实现一些基础库的时候，都会习惯先从它的使用开始去设计它的接口的形式
+* Content-Type是一个必要的字段，要有默认值
+* body是KV格式
+* 不同的Content-Type影响body的格式  
+
+第二步：send函数
+* 在Request的构造器中收集必要的信息
+* 设计一个send函数，把请求真实发送到服务器
+* send函数应该是异步的，所以返回Promise   
+
+第三步：发送请求
+* 设计支持已有的connection或者自己新建connection
+* 收到数据传给parser
+* 根据parser的状态resolve Promise   
+
+第四步：ResponseParser总结
+* Response必须分段构造，所以要用一个ResponseParser来“装配”
+* ResponseParser分段处理ResponseText，用状态机来分析文本的结构   
+
+第五步：BodyParser总结
+* Response的body可能根据Content-Type有不同的结构，因此我们会采用子Parser的结构来解决问题
+* 以TrunkedBodyParser为例，同样用状态机来处理body的格式
+
