@@ -29,7 +29,7 @@ function layout(element) {
 
   const items = element.children.filter(e => e.type === 'element'); // 把文本节点过滤掉
 
-  items.sort(function(a, b) {
+  items.sort(function (a, b) {
     return (a.order || 0) - (b.order || 0);
   });
 
@@ -57,7 +57,7 @@ function layout(element) {
     style.alignContent = 'stretch';
   }
 
-  let mainSize, mainStart, mainEnd, mainSign, mainBase, 
+  let mainSize, mainStart, mainEnd, mainSign, mainBase,
     crossSize, crossStart, crossEnd, crossSign, crossBase;
   if (style.flexDirection) {
     mainSize = 'width';
@@ -81,7 +81,7 @@ function layout(element) {
     crossStart = 'top';
     crossEnd = 'bottom';
   }
- 
+
   if (style.flexDirection === 'column') {
     mainSize = 'height';
     mainStart = 'top';
@@ -336,7 +336,7 @@ function layout(element) {
         itemStyle[crossEnd] = crossBase + crossSign * lineCrossSize;
         itemStyle[crossStart] = itemStyle[crossEnd] - crossSign * itemStyle[crossSize];
       }
-      
+
       if (align === 'center') {
         itemStyle[crossStart] = crossBase + crossSign * (lineCrossSize - itemStyle[crossSize]) / 2;
         itemStyle[crossEnd] = itemStyle[crossStart] + crossSign * itemStyle[crossSize];

@@ -8,11 +8,15 @@ let currentToken = null;
 
 let currentAttribute = null;
 
-let stack = [{type: 'document', children: []}];
+let stack = [{
+  type: 'document',
+  children: []
+}];
 let currentTextNode = null;
 
 // 把CSS规则暂存到一个数组里
 let rules = [];
+
 function addCSSRules(text) {
   const ast = css.parse(text);
   // console.log(JSON.stringify(ast, null, '    '));
@@ -48,18 +52,18 @@ function match(element, selector) {
   if (!selector || !element.attributes) {
     return false;
   }
-  
+
   const tags = selector.match(/^\w+/g);
   const ids = selector.match(/\#[-_a-zA-Z]+/g);
   const classNames = selector.match(/\.[-_a-zA-Z]+/g);
-  
+
   if (ids) {
     const attr = element.attributes.filter(item => item.name === 'id')[0];
     if (attr && attr.value === ids[0].replace('#', '')) {
       return true;
     }
   }
-  
+
   if (classNames) {
     const attr = element.attributes.filter(item => item.name === 'class')[0];
     if (!attr || !attr.value) {
@@ -68,9 +72,9 @@ function match(element, selector) {
     const elementClassNames = attr.value.split(' ');
     if (classNames.every(item => elementClassNames.includes(item.replace('.', '')))) {
       return true;
-    } 
+    }
   }
-  
+
   if (tags) {
     if (element.tagName === tags[0]) {
       return true;
@@ -207,7 +211,7 @@ function emit(token) {
     }
 
     currentTextNode = null;
-  
+
   } else if (token.type === 'endTag') {
     if (top.tagName !== token.tagName) {
       throw new Error('Tag start end doesn\'t match');
@@ -221,7 +225,7 @@ function emit(token) {
     }
 
     currentTextNode = null;
-  
+
   } else if (token.type === 'text') {
     if (currentTextNode === null) {
       currentTextNode = {
