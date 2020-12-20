@@ -96,6 +96,87 @@ S=20000001000001
 练习：
 
 - `div#a.b .c[id=x]`
+
+    [0,1,3,1]
 - `#a:not(#b)`
+
+    [0,2,1,0]
 - `*.a`
+
+    [0,0,1,0]
+
 - `div.a`
+
+    [0,0,1,1]
+## 伪类
+- 链接/行为
+    - :any-link
+
+         匹配所有的超链接
+
+         link+vistied = any-link
+    - :link :visited
+
+      :link 匹配还没有访问过的超链接
+      :visited 匹配已经访问过的超链接
+      
+    - :hover
+    - :active
+    - :focus
+    - :target
+
+     给作为锚点的a标签使用
+
+- 树形结构
+    - :empty
+    - :nth-child()
+    - :nth-last-child()
+    - :first-child :last-child :only-child
+
+- 逻辑型
+    - :not伪类
+    - :where :has （Level 4)
+## 伪元素
+- ::before
+- ::after
+
+    一旦应用了before和after的属性，declaration里面就可以写content属性。像一个真正的DOM元素一样，可以生成盒，来参与后续的排版和渲染不正常的元素是没法写content属性的。
+
+    可以理解为通过选择器向界面上添加了一个不存在的元素。
+- ::first-line
+
+    选中第一行，第一行是已经完成排版之后的结果
+
+    - font系列
+    - color系列
+    - background系列
+    - word-spacing
+    - letter-spacing
+    - text-decoration
+    - text-transform
+    - line-height
+- ::first-letter
+
+    选中第一个字母
+
+    - font系列
+    - color系列
+    - background系列
+    - word-spacing
+    - letter-spacing
+    - text-decoration
+    - text-transform
+    - line-height
+    - float
+    - vertical-align
+    - 盒模型系列：margin,padding,border
+
+两种伪元素机制，一种是无中生有，第二种是把一些特定逻辑意义的文字给括起来。
+
+
+   
+思考题：
+
+- 为什么first-letter可以设置float之类的，而first-line不行？
+
+第一行是已经完成排版之后的结果，不能再设置float之类进行重新布局。
