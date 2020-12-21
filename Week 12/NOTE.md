@@ -38,9 +38,14 @@ CSS选择器选中的元素，在排版时可能产生多个盒。
 
 ![](bfc.png)
 
-## Baseline
+### Baseline
 
 inline-block，行内盒，是随之自己里面文字的基线去变化的。
 
 vertical-aglin:top,和行的顶缘对齐
 vertical-algin:bottom,和行的底缘对齐
+
+### 正常流的块级排布
+float会影响生成的行盒的尺寸
+
+**正常流程只有BFC会发生边距折叠margin collapse**
