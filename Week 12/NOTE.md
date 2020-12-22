@@ -49,3 +49,34 @@ vertical-algin:bottom,和行的底缘对齐
 float会影响生成的行盒的尺寸
 
 **正常流程只有BFC会发生边距折叠margin collapse**
+
+## Flex排版
+- 收集盒进行（没有文字的，只有盒）
+- 计算盒在主轴方向的排布
+- 计算盒在交叉轴方向的排布
+- 分行
+    - 根据主轴的尺寸，把元素分进行
+    - 若设置了no-wrap,则强行分配进第一行
+- 计算主轴方向
+    - 找出所有flex元素
+    - 把主轴方向剩余尺寸按比例分配给这些元素
+    - 若剩余空间为负数，所有flex元素为0，等比例压缩剩余元素
+- 计算交叉轴方向
+    - 根据每一行最大元素尺寸计算行高
+    - 根据行高flex-algin（每个元素的属性）,item-aligin（外部容器的属性）,确定元素具体位置
+
+## Animation
+- @keyframes定义
+- animation:使用
+- animation-name 时间曲线
+- animation-duration 动画的时长
+- animation-timing-function 动画的时间曲线
+- animation-delay 动画开始前的延迟
+- animation-iteration-count 动画播放的次数
+- animation-direction 动画的方向
+
+## Transition
+- transition-property 要变换的属性
+- transition-duration 要变换的时长
+- transition-timing-function 要变换的时间曲线
+- transition-delay 延迟
