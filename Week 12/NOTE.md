@@ -80,3 +80,20 @@ float会影响生成的行盒的尺寸
 - transition-duration 要变换的时长
 - transition-timing-function 要变换的时间曲线
 - transition-delay 延迟
+
+三次贝塞尔曲线
+## 渲染和颜色
+CMYK、RGB
+
+HSL、HSV
+
+## 绘制
+- 几何图形
+    - border
+    - box-shadow
+    - border-radius
+- 文字
+    - font
+    - text-decoration
+- 位图
+    - background-image
