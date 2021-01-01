@@ -1,6 +1,51 @@
 <script>
     let names = Object.getOwnPropertyNames(window);
+
+    function filterOut(names, props) {
+        let set = new Set();
+        props.forEach(o => set.add(o));
+        return names.filter(e => !set.has(e));
+    }
+
+    // EMCA 262
+    // https://www.ecma-international.org/ecma-262/11.0/index.html
+    {
+        let js = new Set();
+        let objects = [
+            //Global Object
+            //Value Properties of the Global Object
+            "globalThis", "Infinity", "NaN", "undefined",
+            //Function Properties of the Global Object
+            "eval", "isFinite", "isNaN", "parseFloat", "parseInt", "decodeURI", "decodeURIComponent", "encodeURI", "encodeURIComponent",
+            //Constructor Properties of the Global Object
+            "Array", "ArrayBuffer", "BigInt", "BigInt64Array", "BigUint64Array", "Boolean", "DataView", "Date", "Error", "EvalError",
+             "Float32Array","Float64Array","Function","Int8Array","Int16Array","Int32Array","Map","Number","Object","Promise","Proxy",
+             "RangeError","ReferenceError","RegExp","Set","SharedArrayBuffer","String","Symbol","SyntaxError","TypeError","Uint8Array",
+             "Uint8ClampedArray","Uint16Array","Uint32Array","URIError","WeakMap","WeakSet",
+             //Other Properties of the Global Object
+             "Atomics","JSON","Math","Reflect",
+             "console"
+
+        ];
+        objects.forEach(o => js.add(o));
+        names = names.filter(e => !js.has(e));
+    }
+
+    // Subclass of Node
+    names = names.filter(e => {
+        try {
+            return !(window[e].prototype instanceof Node)
+        } catch (err) {
+            return true;
+        }
+    }).filter(e => e != "Node")
+
+    // events
+    names = names.filter(e => !e.match(/^on/));
+
+    // webkit private
+    names = names.filter(e => !e.match(/^webkit/));
+
     
     console.log(names);
-
 </script>

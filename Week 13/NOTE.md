@@ -38,7 +38,7 @@ HTML SVG MathML
 - range.selectNodeContents 选中一个元素所有的内容
 
 - var fragment = range.extractContents()  
-    range选取的内容从DOM树摘下来，fragment是node的一个子类，它在append的时候，它自己不会append到dom树上，它会把它的所有的子节点代替它自己放上去。
+    range选取的内容从DOM树摘下来，fragment是node的一个子类，它在append的时候，它自己不会append到dom树上，它会把它的所有的子节点代替它自己放上去。fragment不需要发生重排，它的性能比较高。
 - range.insertNode(document.createTexdNode("aaa"))
 ### CSSOM
 
