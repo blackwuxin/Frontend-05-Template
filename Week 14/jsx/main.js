@@ -1,28 +1,20 @@
+import {createElement,Component} from './framework';
 
-function createElement(type,attributes,...children){
-    let element = "";
-    if(typeof type == 'string'){
-        element = document.createElement(type);
-    }else{
-        element = new type;
-    }
 
-    for(let name in attributes){
-        element.setAttribute(name,attributes[name]);
+// let a = <div>
+//     <span>a</span>
+//     <span>b</span>
+//     <span>c</span>
+// </div>
+
+class Carousel extends Component{
+    constructor(){
+        super();
     }
-    for(let child of children){
-        if(typeof child == 'string'){
-            child = document.createTextNode(child);
-        }
-        child && element.appendChild(child);
+    render(){
+        return document.createElement('div')
     }
-    return element;
 }
-
-let a = <div>
-    <span>a</span>
-    <span>b</span>
-    <span>c</span>
-</div>
-
-document.body.appendChild(a)
+// document.body.appendChild(a.root)
+let a = <Carousel/>
+a.mountTo(document.body)
