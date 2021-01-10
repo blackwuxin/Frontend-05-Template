@@ -21,7 +21,7 @@ export function createElement(type,attributes,...children){
 
 export class Component{
     constructor(){
-        this.root = this.render();
+
     }
     setAttribute(name,value){
         this.root.setAttribute(name,value);
@@ -30,7 +30,7 @@ export class Component{
        child.mountTo(this.root);
     }
     mountTo(parent){
-        parent.appendChild(this.root);
+        parent.appendChild(this.render());
     }
 }
 class ElementWrap extends Component{
