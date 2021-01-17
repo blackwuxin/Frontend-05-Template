@@ -11,9 +11,13 @@ export class TimeLine{
         this[TICK] = ()=>{
             let t = Date.now() - startTime;
             for(let animation of this[ANIMATIONS]){
-                if(animation.duration < t)
-                    this[ANIMATIONS].delete(animation)
-                animation.revice(t);
+                let t0 = t;
+                if(animation.duration < t){
+                    this[ANIMATIONS].delete(animation);
+                    t0 = animation.duration;
+                }
+                    
+                animation.revice(t0);
             }
             requestAnimationFrame(this[TICK]);
         }
