@@ -1,6 +1,6 @@
 import { createElement } from "./framework";
 import {Carousel} from './Carousel'
-import {TimeLine} from './animation'
+import {TimeLine,Animation} from './animation'
 
 
 let d = [
@@ -15,4 +15,5 @@ a.mountTo(document.body);
 
 
 let tl = new TimeLine();
+tl.add(new Animation({},"a",0,100,1000,null));
 tl.start()
