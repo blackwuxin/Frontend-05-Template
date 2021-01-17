@@ -1,6 +1,7 @@
+import { createElement } from "./framework";
+import {Carousel} from './Carousel'
+import {TimeLine} from './animation'
 
-import {createElement} from './framework';
-import {Carousel} from './framework';
 
 let d = [
     "https://static001.geekbang.org/resource/image/bb/21/bb38fb7c1073eaee1755f81131f11d21.jpg",
@@ -11,3 +12,7 @@ let d = [
 // document.body.appendChild(a.root)
 let a = <Carousel src={d} />;
 a.mountTo(document.body);
+
+
+let tl = new TimeLine();
+tl.start()
