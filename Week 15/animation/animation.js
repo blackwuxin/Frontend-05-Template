@@ -9,8 +9,11 @@ export class TimeLine{
     start(){
         let startTime = Date.now();
         this[TICK] = ()=>{
+            let t = Date.now() - startTime;
             for(let animation of this[ANIMATIONS]){
-                animation.revice(Date.now() - startTime);
+                if(animation.duration < t)
+                    this[ANIMATIONS].delete(animation)
+                animation.revice(t);
             }
             requestAnimationFrame(this[TICK]);
         }
@@ -35,7 +38,7 @@ export class Animation{
     }
 
     revice(time){
-        console.log(time);
+
         let range = this.endValue - this.startValue;
         this.object[this.property] = this.startValue + range*time/this.duration;
     }
