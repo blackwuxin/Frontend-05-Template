@@ -12,7 +12,17 @@ element.addEventListener("mousedown", (event) => {
         let button = 1;
         while(button <= event.buttons){
             if(button & event.buttons){
-                let context = contexts.get("mouse"+button); 
+                
+                // order of buttons & button property is not same 
+                let key;
+                if(button === 2){
+                    key = 4;
+                }else if(button === 4){
+                    key = 2;
+                }else{
+                    key = button;
+                }
+                let context = contexts.get("mouse"+key); 
                 move(event,context);
             }
             button = button << 1;
