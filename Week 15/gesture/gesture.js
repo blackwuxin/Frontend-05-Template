@@ -80,6 +80,12 @@ element.addEventListener("touchcancel", (event) => {
 
 let start = (point, context) => {
     (context.startX = point.clientX), (context.startY = point.clientY);
+    
+    context.points = [{
+        t:Date.now(),
+        x:point.clientX,
+        y:point.clientY
+    }];
 
     context.isPan = false;
     context.isTap = true;
@@ -110,6 +116,14 @@ let move = (point, context) => {
         console.log(dx, dy);
         console.log("pan");
     }
+    context.points = context.points.filter(point=> Date.now() - point.t < 500);
+
+    context.points.push({
+        t:Date.now(),
+        x:point.clientX,
+        y:point.clientY
+    });
+
     // console.log("move",point.clientX,point.clientY);
 };
 
@@ -119,10 +133,28 @@ let end = (point, context) => {
         clearTimeout(context.handler);
     }
     if (context.isPan) {
+        dispatch("pandend",{});
         console.log("panend");
     }
     if (context.isPress) {
+        dispatch("pressend",{});
         console.log("pressend");
+    }
+
+    let d,v;
+    if(!context.points.length){
+        v = 0;
+    }else{
+        d = Math.sqrt((point.clientX - context.points[0].x) ** 2 + (point.clientY - context.points[0].y) ** 2);
+        v = d / (Date.now() - context.points[0].t);
+    }
+
+    if(v > 1.5){
+        console.log("flick");
+        dispatch("flick",{});
+        context.isFlick = true;
+    }else {
+        context.isFlick = false;
     }
     // console.log("end",point.clientX,point.clientY);
 };
