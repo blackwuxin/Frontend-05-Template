@@ -1,6 +1,6 @@
 let element = document.documentElement;
 let contexts = new Map();
-
+let isListenerMouse = fasle ;
 element.addEventListener("mousedown", (event) => {
     console.log('mousedown',event.button);
     let context = Object.create(null);
@@ -32,12 +32,19 @@ element.addEventListener("mousedown", (event) => {
         let context = contexts.get("mouse"+(1 << event.button)); 
         end(event,context);
         contexts.delete("mouse"+(1 << event.button));
+        if(event.buttons === 0 ){
+            element.removeEventListener("mousemove", mousemove);
+            element.removeEventListener("mouseup", mouseup);
+            isListenerMouse = false;
+        }
 
-        element.removeEventListener("mousemove", mousemove);
-        element.removeEventListener("mouseup", mouseup);
     };
-    element.addEventListener("mousemove", mousemove);
-    element.addEventListener("mouseup", mouseup);
+    if(!isListenerMouse){
+        element.addEventListener("mousemove", mousemove);
+        element.addEventListener("mouseup", mouseup);
+        isListenerMouse = true;
+    }
+   
 });
 
 
