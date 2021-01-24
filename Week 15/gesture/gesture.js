@@ -1,6 +1,6 @@
 let element = document.documentElement;
 let contexts = new Map();
-let isListenerMouse = fasle ;
+let isListenerMouse = false ;
 element.addEventListener("mousedown", (event) => {
     console.log('mousedown',event.button);
     let context = Object.create(null);
@@ -33,15 +33,15 @@ element.addEventListener("mousedown", (event) => {
         end(event,context);
         contexts.delete("mouse"+(1 << event.button));
         if(event.buttons === 0 ){
-            element.removeEventListener("mousemove", mousemove);
-            element.removeEventListener("mouseup", mouseup);
+            document.removeEventListener("mousemove", mousemove);
+            document.removeEventListener("mouseup", mouseup);
             isListenerMouse = false;
         }
 
     };
     if(!isListenerMouse){
-        element.addEventListener("mousemove", mousemove);
-        element.addEventListener("mouseup", mouseup);
+        document.addEventListener("mousemove", mousemove);
+        document.addEventListener("mouseup", mouseup);
         isListenerMouse = true;
     }
    
@@ -115,7 +115,7 @@ let move = (point, context) => {
 
 let end = (point, context) => {
     if (context.isTap) {
-        console.log("tap");
+        dispatch("tap",{});
         clearTimeout(context.handler);
     }
     if (context.isPan) {
@@ -131,3 +131,11 @@ let cancel = (point, context) => {
     clearTimeout(context.handler);
     // console.log("cancel",point.clientX,point.clientY);
 };
+
+function dispatch(type,properites){
+    let event = new Event(type);
+    for(let name in properites){
+        event[name] = properites[name];
+    }
+    element.dispatchEvent(event);
+}
